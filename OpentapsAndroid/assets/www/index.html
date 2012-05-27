@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Opentaps Live Catalog Plugin</title>
+	</head>
+	<body>
+		<input type="text" id="catalogId" placeholder="catalogId" value=""/>
+		<input type="text" id="categoryId" placeholder="categoryId" value=""/>
+		<hr>
+		<select name="selectAction" id="selectAction">
+			<option>Action</option>
+			<option value="promotions">Get Promotions</option>
+			<option value="rootCategoryId">Get Root Category Id</option>
+			<option value="categoryHierarchy">Get Category Hierarchy</option>
+			<option value="category">Get Category</option>
+		</select>
+		<input disabled id="btnRun" type="button" value="Run"  />
+		<hr>
+		
+		<div id="result"></div>
+		
+		<hr>
+		
+		<script type="text/javascript" src="cordova-1.7.0.js"></script>
+		<script type="text/javascript" src="opentaps.js"></script>
+		<script type="text/javascript" >
+			document.addEventListener('deviceready', function() {
+				var btnRun = document.getElementById("btnRun");
+				btnRun.onclick = function() {
+					var selectAction = document.getElementById("selectAction").options[document.getElementById("selectAction").selectedIndex].value;
+					if (selectAction == "promotions") {
+						window.plugins.opentaps.getAvailablePromotions(
+							function(r){document.getElementById("result").innerHTML=JSON.stringify(r);},
+							function(e){alert(e)}
+						);
+					} else if (selectAction == "rootCategoryId") {
+						window.plugins.opentaps.getBrowseRootCategoryId(
+					    	document.getElementById("catalogId").value,
+					    	function(r){document.getElementById("result").innerHTML=JSON.stringify(r);},
+							function(e){alert(e)}
+						);
+					} else if (selectAction == "categoryHierarchy") {
+						window.plugins.opentaps.getCategoryHierarchy(
+					    	document.getElementById("categoryId").value,
+					    	document.getElementById("catalogId").value,
+					    	function(r){document.getElementById("result").innerHTML=JSON.stringify(r);},
+							function(e){alert(e)}
+						);
+					} else if (selectAction == "category") {
+						window.plugins.opentaps.getCategory(
+						    	document.getElementById("categoryId").value,
+					    	document.getElementById("catalogId").value,
+					    	function(r){document.getElementById("result").innerHTML=JSON.stringify(r);},
+							function(e){alert(e)}
+						);
+					} else {
+						alert("Select action");
+					}
+				}
+				btnRun.disabled=false;
+  			}, true);
+
+		</script>
+	</body>
+</html>

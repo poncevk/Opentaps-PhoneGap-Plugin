@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, OpentapsAndroidActivity!</string>
+    <string name="app_name">OpentapsAndroid</string>
+    
+	<string name="opentaps_url">http://10.0.2.2:8090/livecatalog/xmlrpc</string>
+    <string name="opentaps_system_id">9000</string>
+    <string name="opentaps_product_store_id">9000</string>
+</resources>
